@@ -1,5 +1,5 @@
 class Compuertas:
-    def __init__(self,n) -> None:
+    def __init__(self,n = 1) :
         self.option = n
     #con esta funcion y con el parametro pasado por el constructor se escoge la matriz que refleja
     # las compiertas logicas or ,And, nan,xor
