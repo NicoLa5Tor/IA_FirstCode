@@ -98,16 +98,25 @@ def perceptron(Y0p):
         dict_total["Pesos ideales: "] = {'w10' : list_weigth[0], 'w11': list_weigth[1],'w12':list_weigth[2]}
     return dict_total,list_weigth
 #apartado main o ejecución
+#esta validacion permite analizar el tipo de compuerta que fue asignada, dado que la unica diferente es la Xor
+#por eso se deja en el else, porque es la opcion 4
 if obj_compuerta.option < 4:
-    dict_total,_ = perceptron(Y0p=Y0p)
+    dict_total,_ = perceptron(Y0p=Y0p) #se ejecuta la funcion perceptron y se obtiene tanto el diccionario local de
+    #la funcion perceptron y un dato que en este caso no se usa, por eso lo dejamos como _
+    #este txt_aux simplemente asigna los pesos a un texto, para luego concatenarlos con el texto padre, y asi crear
+    #el txt que se va a leer
     txt_aux = f"""
     Los pesos ideales son:\n
     W10 : {list_weigth[0]} \n
     W01 : {list_weigth[1]} \n
     W02 : {list_weigth[2]} \n"""
 else:
+    #como son 3 perceptrones, ejecuatmos el codigo 3 veces
     for i in range(3):
-            name = f'Y{i+1}'
+            
+            name = f'Y{i+1}' #esto simplemente asigna el nombre de la compuerta auxiliar
+            #estas validaciones sirven para cambiar la lista o la matriz de a compuerta, de manera iterativa,
+            #ya que esta variable es global y se usa mucho en la funcion perceptron
             if i == 2:
                 name = 'XOR'
                 list_compuerta = obj_compuerta.xor()
@@ -115,12 +124,19 @@ else:
                 list_compuerta = obj_compuerta.y2()
             elif i == 0:
                 list_compuerta = obj_compuerta.y1()
+                #aqui simplemenete validamos el nombre de la llave en nuestro diccionario para evitar 
+                #errores
             if f'Compuerta {name}' not in dict_total:
-               list_weigth = obj_peticiones.weigths()
-               asign_new_val_constructor()
-               Y0p = obj_peticiones.last_column()
-               dict_total[f'Compuerta {name}'],w_aux =  perceptron(Y0p=Y0p)
-               epocas_totales += epoca+1
+               list_weigth = obj_peticiones.weigths() #volvemos a asignar pesos aleatoreos
+               asign_new_val_constructor() #reasignamos las variables o los objetos 
+               Y0p = obj_peticiones.last_column() #traemos la lista de la ultima columna de la matriz,
+               #lo que nos trae los datos y deseados
+               dict_total[f'Compuerta {name}'],w_aux =  perceptron(Y0p=Y0p) #esto guarda el diccionario
+               #extraido de la funcion perceptron y se concatena al diccionario padre, a su vez se trae el w final de cada 
+               #compuerta auxiliar
+               epocas_totales += epoca+1 #sumamos las epocas de cada auxiliar para tener un total ponderado
+               #aqui se van sumando los textos con los pesos y las epocas de cada compuerta auxiliar
+               #esto para dat un texto más detallado
                txt_aux += f"""
                
                La operacion de aprendizaje tubo un total de {epoca+1} epocas.\n

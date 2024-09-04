@@ -1,45 +1,45 @@
 
                         Compuerta XOR 
 
-La operacion de aprendizaje tubo un total de 22 epocas.
+La operacion de aprendizaje tubo un total de 15 epocas.
 
-El aprendizaje demoro aproximadamente 0.030512571334838867 segundos 
+El aprendizaje demoro aproximadamente 0.018410921096801758 segundos 
  
 
                
-               La operacion de aprendizaje tubo un total de 8 epocas.
+               La operacion de aprendizaje tubo un total de 1 epocas.
 
                La compuerta Y1 arrojo los siguientes pesos
 
-               W10 : 0.24 
+               W10 : 0.17 
 
-               W01 : 0.56 
+               W01 : 0.93 
 
-               W02 : -0.37 
+               W02 : -0.79 
 
                
                
-               La operacion de aprendizaje tubo un total de 6 epocas.
+               La operacion de aprendizaje tubo un total de 4 epocas.
 
                La compuerta Y2 arrojo los siguientes pesos
 
-               W10 : 0.03 
+               W10 : 0.39 
 
-               W01 : -0.3 
+               W01 : -0.03 
 
-               W02 : 0.54 
+               W02 : 0.63 
 
                
                
-               La operacion de aprendizaje tubo un total de 8 epocas.
+               La operacion de aprendizaje tubo un total de 10 epocas.
 
                La compuerta XOR arrojo los siguientes pesos
 
-               W10 : 0.47 
+               W10 : 0.25 
 
-               W01 : 0.66 
+               W01 : 0.72 
 
-               W02 : 0.56 
+               W02 : 0.63 
 
                
 El perceptron fue entrenado par la direccion de: 
