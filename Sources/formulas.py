@@ -9,6 +9,7 @@ class Formulas:
         z_toria = 0
         ind = 0
         com_logical_reverse = self.logical[index][::-1]
+        print(com_logical_reverse)
         while ind < len(self.logical)-1:
             z_toria += com_logical_reverse[ind+1] * self.list_w[ind]
             ind += 1
