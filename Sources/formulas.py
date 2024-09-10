@@ -1,7 +1,7 @@
 class Formulas:
     def __init__(self,w = [],list_logical = []):
         self.list_w = w
-        self.alfa = 0.5
+        self.alfa = 0.1
         self.logical = list_logical
 
 # la formula usada para la sumatoria total neta es: [x0*w0+x1*w11+x2*w12]
@@ -24,6 +24,8 @@ class Formulas:
         new_weigth = []
         while  index < len(self.list_w):     
             #formula de la reasignacion de pesos   newPeso = wactual + x * alfa * error_actual
+            print(self.list_w[index])
+            print(list_x[index+1])
             new_weigth.append(round(self.list_w[index] + (list_x[index+1] * self.alfa * err_actual),2))
             index += 1
         return new_weigth

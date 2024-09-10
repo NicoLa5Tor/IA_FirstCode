@@ -12,3 +12,4 @@ class Peticiones:
 #en el ultimo indice
     def last_column(self):
         return [x[-1] for x in self.list]
+    

@@ -55,6 +55,7 @@ def perceptron(Y0p):
     global index,obj_compuerta,obj_formulas,obj_peticiones,list_weigth
     index = 0
     epoca = 0
+    retornar = False
     while index < 4:#se recorre la matriz de las compuertas desde el primer patron hasta el ultimo
         # se llama ala funcion de sumatoria para sacar al suma ponderada  neta
         sumatoria =obj_formulas.sum_net(index=index)
@@ -62,36 +63,40 @@ def perceptron(Y0p):
         if f'Epoca {epoca+1}' not in dict_total:
             dict_total[f'Epoca {epoca+1}'] = {}
         if f'Patron({index+1})-T+{index}' not in dict_total[f'Epoca {epoca+1}']:
-            dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})-T+{epoca}'] = {'NET' : sumatoria}
+            dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})'] = {'NET' : sumatoria}
         else:
-            dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})-T+{epoca}'] = {'NET' : sumatoria}
+            dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})'] = {'NET' : sumatoria}
         # se hace la validacion de la sumatoria, por si sumatoria es mayo o igual a 0, para asignar el YDp
-        if sumatoria > 0:
+        if sumatoria >= 0:
             sumatoria = 1
         else:
             sumatoria = 0
         #agregamos los pesos al diccionario, pero validando que el index no se pase de los 3 pesos existentes
         for i in range(3):
-            dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})-T+{epoca}'][f'W1{i}'] = list_weigth[i]
+            dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})'][f'W1{i}'] = list_weigth[i]
         #asignamos las variables al diccionario
-        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})-T+{epoca}']['YD'] = list_compuerta[index][-1]
-        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})-T+{epoca}'][f'x{index}'] = list_compuerta[index][-4+index]
+        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})']['YD'] = list_compuerta[index][-1]
+        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})'][f'x{index}'] = list_compuerta[index][-4+index]
         #asignamos el YDp al diccionario
-        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})-T+{epoca}'][f'Y0p{index+1}'] = sumatoria
+        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})'][f'Y0p{index+1}'] = sumatoria
         #asignamos el valor del error al diccionario
         e = obj_formulas.actual_error(ob=sumatoria,esp=Y0p[index])
-        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})-T+{epoca}'][f'Ep{index+1}'] = e
+        dict_total[f'Epoca {epoca+1}'][f'Patron({index+1})'][f'Ep'] = e
         index += 1
         #validamos si hay que seguir el ciclo o reasignar pesos, (se revisa el error dado del patron actual)
-        if e != 0:
-            #primero se cartiga la neurona
+        if e != 0 and retornar == False:
             list_weigth = obj_formulas.reasing_weigth(err_actual=e,list_x=list_compuerta[index-1][::-1])
+            retornar = True
+        if retornar == True and index == 4:
+            #primero se cartiga la neurona
             asign_new_val_constructor()
             #se le dice a la red que comience de nuevo
             index = 0
             #se suma la cantidad de epocas
             epoca += 1
+            retornar = False
             print(f"Inicia la epoca {epoca+1}")
+
     #esta validacion se hace para evitar errores keytipe al agragar una nueva llave al diccionario dict
 #y luego se agrega la llave (Pesos ideales) que señala los pesos que se debe usar
     if 'Pesos ideales' not in dict_total:
@@ -127,7 +132,7 @@ else:
                 #aqui simplemenete validamos el nombre de la llave en nuestro diccionario para evitar 
                 #errores
             if f'Compuerta {name}' not in dict_total:
-               list_weigth = obj_peticiones.weigths() #volvemos a asignar pesos aleatoreos
+               #volvemos a asignar pesos aleatoreos
                asign_new_val_constructor() #reasignamos las variables o los objetos 
                Y0p = obj_peticiones.last_column() #traemos la lista de la ultima columna de la matriz,
                #lo que nos trae los datos y deseados
