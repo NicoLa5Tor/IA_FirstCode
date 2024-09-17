@@ -14,6 +14,10 @@ class System_op:
             txt.write(txtt)
     def search_path(self,path):
         return os.path.join(os.getcwd(),path)
+    def read_document(self,name):
+        with open(name) as file:
+            data = file.readlines()
+        return data
     #esta funcion usa un comando en bash para poder mostrar un mensaje al usuario, los datos pedidos por la funcion
     #no son mas que el cuerpo del mensaje
     def mss_info(self,title,message,time=5,app_id="Entrenamiento perceptron",image_url = ""):

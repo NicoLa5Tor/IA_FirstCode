@@ -1,0 +1,11 @@
+                            CADA DATO SEPARELO POR COMAS (si hay más de uno)
+Escriba los pesos, (SIEMPRE DEJE LA BIÑETA)
+*
+Escriba el alpha que desea (DEJE LA BIÑETA)
+*
+Escriba la compuerta que desea.
+1.or
+2.and
+3.Nan
+4.Exor
+*

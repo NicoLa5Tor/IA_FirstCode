@@ -10,18 +10,41 @@ index = 0
 dict_total = {}
 txt_aux = ""
 epocas_totales = 0
+n = 1
+alpha = 0.3
 #creacion de objetos 
 obj_peticiones = Peticiones()
 obj_system = System_op()
+list_weigth = obj_peticiones.weigths()
+#obtener los datos del txt
+try:
+    data_txt = obj_system.read_document(name='Datos.txt')
+    list_datos = [a.strip().replace("*","")  for a in data_txt if a.find('*') != -1 ]
+    print(list_datos)
+    #validar compuerta 
+    if list_datos[2] != "":
+        print("No es nulo")
+        n = float(list_datos[2])
+    if list_datos[1] != "":
+        alpha = float(list_datos[1])
+    if list_datos[0] != "":
+        print("No es nulo")
+        print(list_datos[0])
+        list_weigth = list_datos[0].split(",")
+        list_weigth = [float(a) for a in list_weigth]
+        print(list_weigth)
+except Exception as e:
+    print(e)
+print(f"{n},{alpha},{list_weigth}")
+time.sleep(5)
 #aqui si se envia un n = a un rango de 1 a 4, se asigna un compurta logica
 #1.or
 #2.and
 #3.Nan
 #4.Exor
-obj_compuerta= Compuertas(n=4)
+obj_compuerta= Compuertas(n=n)
 obj_formulas = Formulas()
 ##sumatoria 
-list_weigth = obj_peticiones.weigths()
 list_compuerta = obj_compuerta.comp()
 #reasignacion de variables de contructores
 #se hace una funcion para poder llamr de nuevo el reasignamiento de variables
